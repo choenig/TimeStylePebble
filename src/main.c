@@ -4,6 +4,7 @@
 #include "settings.h"
 #include "weather.h"
 #include "sidebar.h"
+#include "batterybar.h"
 
 // windows and layers
 static Window* mainWindow;
@@ -116,6 +117,9 @@ void redrawScreen() {
 
   // update the sidebar
   Sidebar_redraw();
+
+  // update the batterybar
+  Batterybar_redraw();
 }
 
 static void main_window_load(Window *window) {
@@ -141,6 +145,9 @@ static void main_window_load(Window *window) {
   // create the sidebar
   Sidebar_init(window);
 
+  // create the batterybar
+  Batterybar_init(window);
+
   // Make sure the time is displayed from the start
   redrawScreen();
   update_clock();
@@ -152,6 +159,7 @@ static void main_window_unload(Window *window) {
   }
 
   Sidebar_deinit();
+  Batterybar_deinit();
 }
 
 void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -206,6 +214,7 @@ void bluetoothStateChanged(bool newConnectionState) {
 // force the sidebar to redraw any time the battery state changes
 void batteryStateChanged(BatteryChargeState charge_state) {
   Sidebar_redraw();
+  Batterybar_update(charge_state);
 }
 
 // fixes for disappearing elements after notifications
@@ -263,6 +272,8 @@ static void init() {
   bluetooth_connection_service_subscribe(bluetoothStateChanged);
 
   // register with battery service
+  BatteryChargeState charge_state = battery_state_service_peek();
+  batteryStateChanged(charge_state);
   battery_state_service_subscribe(batteryStateChanged);
 
   // set up focus change handlers

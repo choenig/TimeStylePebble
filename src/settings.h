@@ -28,6 +28,10 @@ typedef struct {
   bool sidebarOnLeft;
   bool useLargeFonts;
 
+  // batterybar settings
+  bool showBatterybar;
+  bool batteryBarAtTheTop;
+
   // weather widget settings
   bool useMetric;
 
@@ -87,6 +91,11 @@ extern Settings globalSettings;
 // battery meter widget settings
 #define SETTING_SHOW_BATTERY_PCT_KEY      11
 #define SETTING_DISABLE_AUTOBATTERY       36
+
+// battery bar
+#define SETTING_SHOW_BATTERYBAR_KEY       37
+#define SETTING_BATTERYBAR_AT_THE_TOP_KEY 38
+
 
 // alt tz widget settings
 #define SETTING_ALTCLOCK_NAME_KEY         30
