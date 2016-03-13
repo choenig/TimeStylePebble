@@ -79,6 +79,8 @@ void Settings_loadFromStorage() {
   globalSettings.healthUseRestfulSleep  = persist_read_bool(SETTING_HEALTH_USE_RESTFUL_SLEEP);
   globalSettings.showBatterybar         = true;//persist_read_bool(SETTING_SHOW_BATTERYBAR_KEY);
   globalSettings.batteryBarAtTheTop     = false;//persist_read_bool(SETTING_BATTERYBAR_AT_THE_TOP_KEY);
+  globalSettings.showSecondsbar         = true;//persist_read_bool(SETTING_SHOW_SECONDSBAR_KEY);
+  globalSettings.secondsbarResolution   = 5;//persist_read_int(SETTING_SECONDSBAR_RESOLUTION_KEY);
 
   if(persist_exists(SETTING_DECIMAL_SEPARATOR_KEY)) {
     globalSettings.decimalSeparator = '.';
@@ -119,6 +121,8 @@ void Settings_saveToStorage() {
   persist_write_bool(SETTING_HEALTH_USE_RESTFUL_SLEEP,  globalSettings.healthUseRestfulSleep);
   persist_write_bool(SETTING_SHOW_BATTERYBAR_KEY,       globalSettings.showBatterybar);
   persist_write_bool(SETTING_BATTERYBAR_AT_THE_TOP_KEY, globalSettings.batteryBarAtTheTop);
+  persist_write_bool(SETTING_SHOW_SECONDSBAR_KEY,       globalSettings.showSecondsbar);
+  persist_write_int(SETTING_SECONDSBAR_RESOLUTION_KEY,  globalSettings.secondsbarResolution);
 
   persist_write_int(SETTINGS_VERSION_KEY,               CURRENT_SETTINGS_VERSION);
 }

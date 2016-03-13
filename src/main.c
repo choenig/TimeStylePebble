@@ -5,6 +5,7 @@
 #include "weather.h"
 #include "sidebar.h"
 #include "batterybar.h"
+#include "secondsbar.h"
 
 // windows and layers
 static Window* mainWindow;
@@ -120,6 +121,9 @@ void redrawScreen() {
 
   // update the batterybar
   Batterybar_redraw();
+
+  // update the secondsbar
+  Secondsbar_redraw();
 }
 
 static void main_window_load(Window *window) {
@@ -148,6 +152,9 @@ static void main_window_load(Window *window) {
   // create the batterybar
   Batterybar_init(window);
 
+  // create the secondsbar
+  Secondsbar_init(window);
+
   // Make sure the time is displayed from the start
   redrawScreen();
   update_clock();
@@ -160,6 +167,7 @@ static void main_window_unload(Window *window) {
 
   Sidebar_deinit();
   Batterybar_deinit();
+  Secondsbar_deinit();
 }
 
 void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -187,6 +195,7 @@ void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   }
 
   update_clock();
+  Secondsbar_update(tick_time->tm_sec);
 }
 
 void bluetoothStateChanged(bool newConnectionState) {

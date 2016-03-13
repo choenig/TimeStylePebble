@@ -32,6 +32,10 @@ typedef struct {
   bool showBatterybar;
   bool batteryBarAtTheTop;
 
+  // secondsbar settings
+  bool showSecondsbar;
+  int secondsbarResolution;
+
   // weather widget settings
   bool useMetric;
 
@@ -96,6 +100,9 @@ extern Settings globalSettings;
 #define SETTING_SHOW_BATTERYBAR_KEY       37
 #define SETTING_BATTERYBAR_AT_THE_TOP_KEY 38
 
+// seconds bar
+#define SETTING_SHOW_SECONDSBAR_KEY       39
+#define SETTING_SECONDSBAR_RESOLUTION_KEY 40
 
 // alt tz widget settings
 #define SETTING_ALTCLOCK_NAME_KEY         30
